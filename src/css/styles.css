@@ -20,3 +20,52 @@
     rgb(255, 255, 255) 100%
   );
 }
+
+.title {
+  padding-top: 24px;
+  padding-left: 40px;
+  padding-bottom: 40px;
+  display: flex;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.16667;
+  letter-spacing: -0.04em;
+  color: #fff;
+}
+
+.support-list {
+  padding-left: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+}
+
+.list {
+  /* width: 143px; */
+  height: 32px;
+}
+
+.link {
+  filter: brightness(0) invert(1);
+  mix-blend-mode: luminosity;
+}
+
+.load-more {
+  display: flex;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 150px;
+  height: 40px;
+  background: #4e75ff;
+  border: none;
+  justify-content: center;
+  margin: auto;
+}

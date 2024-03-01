@@ -1,5 +1,7 @@
 const parentElement = document.querySelector('.support.container');
 
+const perPage = 6; // Кількість благодійних фондів на одній сторінці
+
 const charities = [
   {
     title: 'Save the Children',
@@ -50,22 +52,53 @@ const charities = [
 
 // Створюємо список благодійних фондів
 const charityList = document.createElement('ul');
+charityList.classList.add('support-list');
+
 
 // Проходимося по кожному благодійному фонду і створюємо посилання з логотипом
-charities.forEach(charity => {
-  const listItem = document.createElement('li');
-  const link = document.createElement('a');
+function createListItem (charity) {
+    const listItem = document.createElement('li');
+    listItem.classList.add('list');
+    const link = document.createElement('a');
+    link.classList.add('link');
   link.href = charity.url;
   link.target = '_blank'; // Відкривати у новій вкладці
-  const img = document.createElement('img');
+    const img = document.createElement('img');
+    img.classList.add('img');
   img.src = charity.img;
-  img.alt = charity.title;
+    img.alt = charity.title;
   link.appendChild(img);
   listItem.appendChild(link);
   charityList.appendChild(listItem);
+};
+
+// Показуємо перші благодійні фонди на сторінці
+charities.slice(0, perPage).forEach(charity => {
+  createListItem(charity);
 });
-
-
 
 // Додаємо список благодійних фондів до контейнера.
 parentElement.appendChild(charityList);
+
+
+// Створюємо кнопку для завантаження наступних благодійних фондів
+const loadMoreButton = document.createElement('button');
+loadMoreButton.textContent = 'Load More';
+loadMoreButton.classList.add('load-more');
+
+// Обробник події для кнопки завантаження наступних благодійних фондів
+loadMoreButton.addEventListener('click', () => {
+  const start = charityList.children.length;
+  const end = start + perPage;
+  charities.slice(start, end).forEach(charity => {
+    createListItem(charity);
+  });
+
+  // Приховуємо кнопку, якщо всі благодійні фонди вже показані
+  if (end >= charities.length) {
+    loadMoreButton.style.display = 'none';
+  }
+});
+
+// Додаємо кнопку завантаження наступних благодійних фондів до сторінки
+parentElement.appendChild(loadMoreButton);
